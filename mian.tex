@@ -1,0 +1,241 @@
+\documentclass[sigconf]{acmart}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{booktabs}
+\usepackage{xspace}
+\usepackage{epsfig}
+\usepackage[small]{subfigure}
+\usepackage{epstopdf}
+\usepackage{upgreek}
+\usepackage[show]{chato-notes}
+\usepackage{url}
+% \usepackage{caption}
+% \usepackage[font=Large]{subfig}
+%\usepackage{caption}
+
+%\captionsetup[subfigure]{labelfont=it,textfont={bf,it}}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}  % Use Input in the format of Algorithm
+\renewcommand{\algorithmicensure}{\textbf{Output:}} % Use Output in the format of Algorithm
+
+\newcommand{\kw}[1]{{\ensuremath {\mathsf{#1}}}\xspace}
+\newcommand{\proofsketch}{\noindent{\bf Proof Sketch: }}
+
+\newcommand{\stitle}[1]{\vspace{1ex} \noindent{\bf #1}}
+\long\def\comment#1{}
+\newcommand{\eop}{\hspace*{\fill}\mbox{$\Box$}}
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\black}[1]{\textcolor{black}{#1}}
+\newcommand{\score}{\kw{f}}
+%\newcommand{\score}{\kw{g}}
+\newcommand{\feq}{\kw{feq}}
+\newcommand{\dis}{\kw{cor}}
+%\newcommand{\dis}{\kw{correlation}}
+\newcommand{\rep}{\kw{rep}}
+%\newcommand{\smy}{\kw{summary}}
+%\newcommand{\smy}{\kw{smy}}
+\newcommand{\smy}{\kw{rep}}
+\newcommand{\g}{\kw{g}}
+\newcommand{\dist}{\kw{dist}}
+\newcommand{\smyp}{\kw{kVDO}-\kw{problem}}
+\newcommand{\anc}{\kw{anc}}
+\newcommand{\dec}{\kw{des}}
+\newcommand{\des}{\kw{des}}
+\newcommand{\F}{\kw{F}}
+
+\newcommand{\GVDO}{\kw{GVDO}}
+\newcommand{\greedy}{\kw{GVDO}}
+\newcommand{\FEQ}{\kw{FEQ}}
+\newcommand{\AGG}{\kw{AGG}}
+\newcommand{\CAGG}{\kw{CAGG}}
+\newcommand{\LASP}{\kw{LASP}}
+\newcommand{\Baseline}{\kw{Baseline}}
+
+\newcommand{\kdag}{\kw{kDAG}-\kw{problem}}
+
+\newcommand{\DAG}{\kw{DAG}}
+\newcommand{\DAGs}{\kw{DAGs}}
+\newcommand{\nb}{\kw{N}}
+\newcommand{\vtree}{\kw{Vtree}}
+\newcommand{\DP}{\kw{DP}}
+\newcommand{\dfs}{\kw{DFS}}
+\newcommand{\Dep}{\kw{DEP}}
+\newcommand{\dep}{\kw{dep}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\gbase}{\kw{Greedy}}
+\newcommand{\gfast}{\kw{Greedy+}}
+\newcommand{\vdag}{\kw{k}-\kw{PCGS}}
+% \newcommand{\vdag}{\kw{VDAG}}
+\newcommand{\avgd}{\kw{Dist_{avg}}}
+\newcommand{\covs}{\kw{Cover_{w}}}
+\newcommand{\brute}{\kw{Brute}-\kw{Force}}
+\newcommand{\ext}{\kw{EXT}-\kw{Greedy}}
+\newcommand{\na}{\kw{na}}
+\newcommand{\can}{\mathcal{C}}
+\newcommand{\UB}{\kw{UB}}
+\newcommand{\LB}{\kw{LB}}
+\newcommand{\ub}{\kw{ub}}
+\newcommand{\lb}{\kw{lb}}
+%\newcommand{\ksmall}{\underline{\triangle_{\g}^{k}(*|\can)}}
+%\newcommand{\ksmall}{\topline{\triangle^{k}}}
+%\newcommand{\ksmall}{\Delta_{top-k}^*}
+\newcommand{\ksmall}{\Delta_{k}^*}
+% \newcommand{\UBfeq}{\kw{UBFeq}}
+% \newcommand{\LBfeq}{\kw{LBFeq}}
+\newcommand{\UBfeq}{\kw{ubFeq}}
+\newcommand{\LBfeq}{\kw{lbFeq}}
+\newcommand{\Feq}{\kw{Feq}}
+\newcommand{\aggf}{\kw{Feq}}
+
+\newcommand{\ignore}[1]{}
+\newcommand{\nop}[1]{}
+\newcommand{\eat}[1]{}
+\newcommand{\eatSIGMOD}[1]{}
+\newcommand{\eatCIKM}[1]{}
+\newcommand{\CIKM}[1]{\black{#1}}
+\newcommand{\SIGMOD}[1]{\black{#1}}
+
+%\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\xin}[1]{\blue{#1}} 
+\newcommand{\revision}[1]{\blue{#1}} 
+\newtheorem{definition}{Definition} 
+\newtheorem{example}{Example} 
+\newtheorem{theorem}{Theorem} 
+\newtheorem{lemma}{Lemma}
+\newtheorem{inference}{Inference}
+\newtheorem{property}{Property}
+\newtheorem{experiment}{Experiment}
+
+
+
+\newcommand{\squishlisttight}{
+ \begin{list}{$\bullet$}
+  { \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\topsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\leftmargin}{1em}
+    \setlength{\labelwidth}{1em}
+    \setlength{\labelsep}{0.5em}
+} }
+
+\newcounter{qcounter}
+\newcommand{\squishnumlist} {
+\begin{list}{\arabic{qcounter}.~}{\usecounter{qcounter}} 
+{  \setlength{\itemsep}{0pt}
+    \setlength{\parsep}{0pt}
+    \setlength{\topsep}{0pt}
+    \setlength{\partopsep}{0pt}
+    \setlength{\leftmargin}{2em}
+    \setlength{\labelwidth}{1.5em}
+    \setlength{\labelsep}{0.5em}
+}}
+
+\newcommand{\squishend}{
+  \end{list}
+}
+
+\copyrightyear{2020}
+\acmYear{2020}
+\setcopyright{acmcopyright}
+\acmConference[CIKM '20] {The 29th ACM International Conference on Information and Knowledge Management}{October 19--23, 2020}{Virtual Event, Ireland}
+\acmBooktitle{The 29th ACM International Conference on Information and Knowledge Management (CIKM '20), October 19--23, 2020, Virtual Event, Ireland}
+\acmPrice{15.00}
+\acmDOI{10.1145/XXXXXX.XXXXXX}
+\acmISBN{978-1-4503-6859-9/20/10}
+% Authors, replace the red X's with your assigned DOI string during the rightsreview eform process.
+
+\settopmatter{printacmref=true}
+\begin{document}
+\fancyhead{}
+% ****************** TITLE ****************************************
+
+%\title{Graph Visualization in Directed  Acyclic  Graphs}
+\title{Top-k Graph Summarization on Large Hierarchical DAGs}
+
+%\numberofauthors{1} 
+
+\author{Xuliang Zhu, Xin Huang, Byron Choi and Jianliang Xu} 
+ \affiliation{Department of Computer Science,\\
+   Hong Kong Baptist University, \\
+   Hong Kong, China}
+ \email{{csxlzhu, xinhuang, bchoi, xujl}@comp.hkbu.edu.hk}
+
+% \author{PaperID: XXX}
+% \affiliation{%
+%   \institution{\  }
+%   \streetaddress{\   }
+%  \city{\   }
+%   \country{  }
+% }
+% \email{   }
+
+%\renewcommand{\shortauthors}{XXX, et al.}
+
+\begin{abstract}
+
+% Directed acyclic graph (DAG) is an important model to represent terminologies and their hierarchical relationships, such as disease ontology and Image-net classes. 
+% Due to massive terminologies and complex structures in a DAG, it is challenging to summarize the whole hierarchy. 
+% In this paper, we study a new problem of finding $k$ representative vertices to summarize a DAG. We design a summary score function for capturing vertices' diversity coverage and structure correlation. 
+% We show that the problem is NP-hard. Thus, we propose an efficient greedy algorithm with a  $(1-1/e)$-approximation guarantee. Moreover, we revisit the problem of graph summarization for a tree, which is a special form of DAG. We develop an exact algorithm of dynamic programming with polynomial time complexity. Leveraging on the exact solution techniques developed for trees, we further propose an improved greedy algorithm for DAGs. Extensive experiments on real-world datasets demonstrate both the effectiveness and efficiency of proposed algorithms against the state-of-the-art approaches. 
+Directed acyclic graph (DAG) is an essentially important model to represent terminologies and their hierarchical relationships, such as Disease Ontology\eatCIKM{and Image-net categories}. 
+Due to massive terminologies and complex structures in a large DAG, it is challenging to summarize the whole hierarchical DAG. 
+In this paper, we study a new problem of finding $k$ representative vertices to summarize a hierarchical DAG.
+%To measure summarization quality, 
+To depict diverse summarization and important vertices,
+we design a summary score function for capturing vertices' diversity coverage and structure correlation. 
+%We show that the problem is NP-hard. Thus, we propose an efficient greedy algorithm with a  $(1-1/e)$-approximation guarantee. 
+The studied problem is theoretically proven to be NP-hard. To efficiently tackle it, we propose a greedy algorithm with an approximation guarantee, which iteratively adds vertices with the large summary contributions into answers. To further improve answer quality, we propose a subtree extraction based method, which is proven to guarantee achieving higher-quality answers. In addition, we develop a scalable algorithm \vdag based on candidate pruning and \DAG compression for large-scale hierarchical DAGs.
+%We further propose an improved greedy algorithm with a quality guarantee for DAGs. 
+%Moreover, we revisit the problem of graph summarization for a tree, which is a special form of DAG. We develop an exact algorithm of dynamic programming in $O(nhk^3)$ time for a tree of $n$ nodes with a height of $h$.
+%Leveraging the exact solution techniques developed for trees, we further propose an improved greedy algorithm with a quality guarantee for DAGs. 
+Extensive experiments on large real-world datasets demonstrate both the effectiveness and efficiency of proposed algorithms.% against the state-of-the-art approaches. 
+\end{abstract}
+
+\maketitle
+
+\input{tex/intro}
+\input{tex/problem}
+\input{tex/analysis}
+\input{tex/greedy}
+\input{tex/kdag}
+\input{tex/compress} 
+%\input{tex/tree} 
+ 
+\input{tex/exp}
+\input{tex/relate}
+
+\stitle{Acknowledgement.} This paper is supported by NSFC 61702435, HK RGC GRF 12200917, 12201518, 12232716, HK RGC CRF  C6030-18G, and Guangdong Basic and Applied Basic Research Foundation (Project No. 2019B1515130001). Xin Huang is the corresponding author.
+
+\section{Conclusion}\label{sec.conclusion}
+In this paper, we formulate and study a new \kdag,
+%of finding 
+which finds 
+$k$ representative vertices to summarize a  \DAG associated with vertex weights. Due to the problem NP-hardness, we propose efficient greedy algorithms to tackle it. 
+%with a $(1-1/e)$-approximation guarantee. 
+% We also investigate the \kdag in a tree and develop a novel dynamic programming algorithm to find exact answers.
+% Integrating the developed techniques of greedy algorithm for \DAGs and exact solutions for trees, we further propose an improved algorithm for DAGs with a theoretical guarantee in quality. 
+In addition, we develop two improved algorithms to find better answers with a theoretical guarantee in quality and be faster with theoretical complexity analysis, respectively. The scalable method \vdag uses novel techniques of dynamic bounds updating, candidate pruning, and DAG compression. 
+Extensive experiments 
+%results and case studies 
+validate the effectiveness and efficiency of our proposed algorithms.
+% in $O(nhk^3)$ time where $n, h$ are the number of tree nodes and the tree height.
+
+\balance
+
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+% \bibliographystyle{abbrv}
+% \bibliography{vldb_sample}  % vldb_sample.bib is the name of the Bibliography in this case
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{DAG,truss}
+
+
+\end{document}
